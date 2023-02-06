@@ -27,7 +27,7 @@ def main():
     text = input()
     mismatch = find_mismatch(text)
     # Printing answer, write your code here
-    if opening_brackets_stack:
+    if len(opening_brackets_stack)!=0:
         opening_brackets_stack.top().position
     else:
         print("Success")
