@@ -10,34 +10,28 @@ def are_matching(left, right):
 
 def find_mismatch(text):
     opening_brackets_stack = []
-    for I, next in enumerate(text):
-        if next in "([{": 
+    for i, next in enumerate(text):
+        if next in "([{":
             # Process opening bracket
-            opening_brackets_stack.append(Bracket(next, I + 1))
-  
+            opening_brackets_stack.append((next, i + 1))
+
         if next in ")]}":
             # Process closing bracket
-            if len(opening_brackets_stack) == 0 or not are_matching(opening_brackets_stack[-1].char, next):
-                return I + 1
+            if len(opening_brackets_stack) == 0 or not are_matching(opening_brackets_stack[-1][0], next):
+                return i + 1
             opening_brackets_stack.pop()
 
-    if len(opening_brackets_stack) != 0:
-        return opening_brackets_stack[-1].position
-  
-    return "Success"
+    if len(opening_brackets_stack) == 0:
+        return "Success"
+    else:
+        return opening_brackets_stack[0][1]
+
 
 def main():
-    text = input() 
-    if len(text) == 0:
-        print("Success")
-        return
- 
+    text = input()
     mismatch = find_mismatch(text)
-    # Printing answer
-    if mismatch == "Success":
-        print("Success")
-    else:
-        print(mismatch) 
+    print(mismatch)
 
-if __name__ == "__main__": 
+
+if __name__ == "__main__":
     main()
