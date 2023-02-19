@@ -13,28 +13,27 @@ def find_mismatch(text):
     opening_brackets_stack = []
     for i, next in enumerate(text):
         if next in "([{":
-            # Process opening bracket, write your code her
-            opening_brackets_stack.append((next, i + 1))
+            # Process opening bracket
+            opening_brackets_stack.append(Bracket(next, i + 1))
 
         if next in ")]}":
-            # Process closing bracket, write your code here
-            if len(opening_brackets_stack)==0 or not(opening_brackets_stack.top().are_matching(next)):
-                print(i+1)
+            # Process closing bracket
+            if len(opening_brackets_stack) == 0 or not are_matching(opening_brackets_stack[-1].char, next):
+                return i + 1
             opening_brackets_stack.pop()
+
+    if len(opening_brackets_stack) != 0:
+        return opening_brackets_stack[-1].position
+
+    return "Success"
 
 
 def main():
     text = input()
     mismatch = find_mismatch(text)
-    # Printing answer, write your code here
-    if len(opening_brackets_stack)!=0:
-        opening_brackets_stack.top().position
-    else:
-        print("Success")
-
-
+    # Printing answer
+    print(mismatch)
 
 
 if __name__ == "__main__":
     main()
-//fhdjfhd
